@@ -24,6 +24,22 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+/**
+ * Dynamically resolves the full authentication callback URL
+ * Uses the browser window.location.origin (current domain) or VITE_APP_URL fallback
+ */
+export function getAuthRedirectUrl(path: string = '/auth/callback'): string {
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    const origin = window.location.origin.replace(/\/+$/, '');
+    return `${origin}${path.startsWith('/') ? path : `/${path}`}`;
+  }
+  const appUrl = (import.meta.env.VITE_APP_URL || '').replace(/\/+$/, '');
+  if (appUrl) {
+    return `${appUrl}${path.startsWith('/') ? path : `/${path}`}`;
+  }
+  return path;
+}
+
 export function normalizeAuthError(err: any): string {
   if (!err) return 'An unexpected error occurred.';
   const msg = (err.message || err.error_description || err.msg || String(err)).toLowerCase();
@@ -190,7 +206,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   ): Promise<SignUpResult> => {
     try {
       const cleanEmail = email.trim().toLowerCase();
-      const redirectUrl = `${window.location.origin}/auth/callback`;
+      const redirectUrl = getAuthRedirectUrl('/auth/callback');
 
       const { data, error } = await supabase.auth.signUp({
         email: cleanEmail,
@@ -228,7 +244,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithGoogle = async () => {
     try {
-      const redirectUrl = `${window.location.origin}/auth/callback`;
+      const redirectUrl = getAuthRedirectUrl('/auth/callback');
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
@@ -261,7 +277,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const resetPassword = async (email: string) => {
     try {
-      const redirectUrl = `${window.location.origin}/reset-password`;
+      const redirectUrl = getAuthRedirectUrl('/reset-password');
       const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
         redirectTo: redirectUrl,
       });
