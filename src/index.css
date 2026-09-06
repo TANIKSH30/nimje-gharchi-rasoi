@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* ============================================================
+   NIMJE GHARCHI RASOI — WARM SOOTHING CULINARY DESIGN SYSTEM
+   Gentle on the eyes, warm organic linen tones, premium boutique feel
+   ============================================================ */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+}
+
+/* ============================================================
+   SOFT, EYE-PLEASING WARM PALETTE
+   Background: Soft Warm Linen #F6F3EC
+   Card: Pure Soft Off-White #FFFFFF
+   Border: Muted Organic Border #E5E0D6
+   Primary Forest: #226D3B (Calm, pleasant green)
+   Secondary Honey: #C27803
+   ============================================================ */
+@layer base {
+  :root {
+    --background: #F6F3EC;
+    --foreground: #22201E;
+
+    --card: #FFFFFF;
+    --card-foreground: #22201E;
+
+    --popover: #FFFFFF;
+    --popover-foreground: #22201E;
+
+    /* Soothing Forest Emerald */
+    --primary: #226D3B;
+    --primary-foreground: #FFFFFF;
+
+    /* Warm Spiced Honey */
+    --secondary: #C27803;
+    --secondary-foreground: #FFFFFF;
+
+    --muted: #EDE8DE;
+    --muted-foreground: #6B6760;
+
+    --accent: #D97706;
+    --accent-foreground: #22201E;
+
+    --destructive: #DC2626;
+    --destructive-foreground: #FFFFFF;
+
+    --border: #E5E0D6;
+    --input: #E5E0D6;
+    --ring: #226D3B;
+
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    background-color: #F6F3EC;
+    color: #22201E;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  ::selection {
+    background-color: #226D3B20;
+    color: #226D3B;
+  }
+}
+
+/* Custom Soothing Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(107, 103, 96, 0.2);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 103, 96, 0.35);
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(229, 224, 214, 0.9);
+    box-shadow: 0 8px 24px -4px rgba(34, 109, 59, 0.04);
+  }
+
+  .soft-shadow {
+    box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.04);
+  }
+}
