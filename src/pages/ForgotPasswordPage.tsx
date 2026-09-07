@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card, CardContent } from '@/components/ui/Card';
 import { AlertCircle, CheckCircle2, ArrowLeft } from 'lucide-react';
+import SEOHead from '@/components/seo/SEOHead';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -35,6 +36,11 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#FCFBF8] relative overflow-hidden">
+      <SEOHead
+        title="Forgot Password | Nimje Gharchi Rasoi"
+        description="Reset your account password for Nimje Gharchi Rasoi."
+        noIndex={true}
+      />
       <div className="w-full max-w-md relative z-10">
         <Card className="rounded-3xl shadow-xl border border-gray-200 bg-white">
           <CardContent className="p-8">

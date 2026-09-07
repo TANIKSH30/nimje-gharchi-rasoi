@@ -6,6 +6,8 @@ import { supabase } from '@/lib/supabase/client';
 import { Order } from '@/types/database';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import SEOHead from '@/components/seo/SEOHead';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -52,6 +54,11 @@ export default function OrdersPage() {
 
   return (
     <div className="min-h-screen bg-[#FCFBF8] flex flex-col">
+      <SEOHead
+        title="My Order History | Nimje Gharchi Rasoi"
+        description="View your past tiffin and special delicacy orders."
+        noIndex={true}
+      />
       <Navbar />
 
       <main className="flex-grow pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -168,6 +175,7 @@ export default function OrdersPage() {
       </main>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

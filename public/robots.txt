@@ -1,13 +1,29 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
+Allow: /plans
+Allow: /special-orders
+Allow: /about
+Allow: /contact
+Allow: /privacy-policy
+Allow: /terms
+Allow: /refund-policy
+
+# Protected Customer & Admin Routes
 Disallow: /admin
-Disallow: /dashboard/
+Disallow: /admin/
 Disallow: /dashboard
+Disallow: /dashboard/
 Disallow: /checkout
 Disallow: /checkout/
 Disallow: /orders
 Disallow: /subscriptions
 Disallow: /payments
+Disallow: /addresses
+Disallow: /profile
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /auth/
 
 Sitemap: https://nimje-gharchi-rasoi.vercel.app/sitemap.xml

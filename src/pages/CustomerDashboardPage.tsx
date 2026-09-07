@@ -26,6 +26,8 @@ import { supabase } from '@/lib/supabase/client';
 import { Subscription, Order, Address, Payment } from '@/types/database';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import SEOHead from '@/components/seo/SEOHead';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -331,7 +333,12 @@ export default function CustomerDashboardPage() {
     'Valued Customer';
 
   return (
-    <div className="min-h-screen bg-[#FCFBF8] flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-[#FCFBF8] flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900 w-full max-w-full overflow-x-hidden">
+      <SEOHead
+        title="Customer Dashboard | Nimje Gharchi Rasoi"
+        description="Manage your active tiffin subscriptions, pause meal dates, and track Nagpur deliveries."
+        noIndex={true}
+      />
       <Navbar />
 
       <main className="flex-grow pt-24 sm:pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -1286,6 +1293,7 @@ export default function CustomerDashboardPage() {
       </main>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

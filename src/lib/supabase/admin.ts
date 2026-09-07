@@ -1,15 +1,10 @@
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from './client';
 
-export function createAdminClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-service-key';
-
-  return createClient(supabaseUrl, supabaseServiceKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  });
-}
-
-export const supabaseAdmin = createAdminClient();
+/**
+ * Client-Side Supabase Client Reference.
+ *
+ * NOTE: Service-role keys must NEVER be bundled into frontend client applications.
+ * All operations executed from the browser are authenticated and governed via
+ * Supabase Row Level Security (RLS) using the standard client.
+ */
+export const supabaseAdmin = supabase;

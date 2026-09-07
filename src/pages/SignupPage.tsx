@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card, CardContent } from '@/components/ui/Card';
 import { AlertCircle, CheckCircle2, Mail } from 'lucide-react';
+import SEOHead from '@/components/seo/SEOHead';
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState('');
@@ -84,6 +85,11 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#FCFBF8] relative overflow-hidden">
+      <SEOHead
+        title="Create Account | Nimje Gharchi Rasoi"
+        description="Sign up for homemade tiffin subscription in Nagpur."
+        noIndex={true}
+      />
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -z-10 pointer-events-none" />

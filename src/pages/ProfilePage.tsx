@@ -5,6 +5,8 @@ import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase/client';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import SEOHead from '@/components/seo/SEOHead';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -49,6 +51,11 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-[#FCFBF8] flex flex-col">
+      <SEOHead
+        title="Account Profile | Nimje Gharchi Rasoi"
+        description="Manage your account profile and contact details."
+        noIndex={true}
+      />
       <Navbar />
 
       <main className="flex-grow pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -124,6 +131,7 @@ export default function ProfilePage() {
       </main>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

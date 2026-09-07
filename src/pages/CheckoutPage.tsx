@@ -24,6 +24,8 @@ import { supabase } from '@/lib/supabase/client';
 import { Plan, Addon, Address } from '@/types/database';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import SEOHead from '@/components/seo/SEOHead';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -322,7 +324,12 @@ export default function CheckoutPage() {
   const stepsLabels = ['Choose Plan', 'Delivery Address', 'Customize & Time', 'UPI Payment'];
 
   return (
-    <div className="min-h-screen bg-[#FCFBF8] flex flex-col">
+    <div className="min-h-screen bg-[#FCFBF8] flex flex-col w-full max-w-full overflow-x-hidden">
+      <SEOHead
+        title="Checkout & Tiffin Subscription | Nimje Gharchi Rasoi"
+        description="Complete your homemade tiffin subscription order securely."
+        noIndex={true}
+      />
       <Navbar />
 
       <main className="flex-grow pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -840,6 +847,7 @@ export default function CheckoutPage() {
       </Modal>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

@@ -6,6 +6,8 @@ import { supabase } from '@/lib/supabase/client';
 import { Address } from '@/types/database';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import SEOHead from '@/components/seo/SEOHead';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -129,6 +131,11 @@ export default function AddressesPage() {
 
   return (
     <div className="min-h-screen bg-[#FCFBF8] flex flex-col">
+      <SEOHead
+        title="My Delivery Addresses | Nimje Gharchi Rasoi"
+        description="Manage your delivery addresses for homemade tiffins in Nagpur."
+        noIndex={true}
+      />
       <Navbar />
 
       <main className="flex-grow pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -274,6 +281,7 @@ export default function AddressesPage() {
       </Modal>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

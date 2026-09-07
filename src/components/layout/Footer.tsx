@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Clock, Heart, ShieldCheck, UtensilsCrossed } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck, UtensilsCrossed, ArrowRight } from 'lucide-react';
+import {
+  BUSINESS_CONFIG,
+  getPhoneCallUrl,
+  getEmailMailtoUrl,
+  getWhatsAppUrl,
+} from '@/config/business';
 
 export default function Footer() {
   return (
     <footer className="bg-[#131714] text-zinc-300 pt-16 pb-8 border-t border-emerald-950/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
+          {/* Brand Column */}
           <div className="space-y-5">
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 bg-gradient-to-br from-emerald-600 to-teal-800 text-amber-300 rounded-2xl flex items-center justify-center font-black text-xl shadow-lg shadow-emerald-950/40 border border-emerald-500/30">
@@ -15,7 +21,7 @@ export default function Footer() {
               </div>
               <div className="flex flex-col">
                 <span className="font-black text-xl leading-tight text-white tracking-tight">
-                  Nimje Gharchi Rasoi
+                  {BUSINESS_CONFIG.name}
                 </span>
                 <span className="text-[10px] font-extrabold text-amber-400 tracking-widest uppercase">
                   Nagpur • Homestyle Mess
@@ -25,14 +31,14 @@ export default function Footer() {
             <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
               20+ years of trust serving fresh, hygienic, authentic Vidarbha & Maharashtrian home-cooked tiffins delivered on-time across Nagpur.
             </p>
-            
+
             {/* Google 5-Star Rating Badge */}
             <a
-              href="https://www.google.com/search?q=Nimje+Gharachi+Rasoi+Tiffin+services+Nagpur"
+              href={BUSINESS_CONFIG.googleReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition-all text-xs font-bold w-fit shadow-xs group"
-              title="Rate Nimje Gharachi Rasoi on Google"
+              className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition-all text-xs font-bold w-fit shadow-xs group cursor-pointer"
+              title="View Google Reviews for Nimje Gharchi Rasoi Nagpur"
             >
               <span className="flex text-amber-400 text-sm">★★★★★</span>
               <span>5.0 on Google</span>
@@ -41,7 +47,7 @@ export default function Footer() {
 
             <div className="flex items-center gap-2 text-xs text-emerald-300/90 bg-emerald-950/60 border border-emerald-800/40 px-3.5 py-2 rounded-2xl w-fit">
               <ShieldCheck size={16} className="text-emerald-400 shrink-0" />
-              <span>100% Pure Veg • No Added Soda • Desi Flavors</span>
+              <span>100% Pure Veg • No Added Soda • Desi Spices</span>
             </div>
           </div>
 
@@ -79,15 +85,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Customer & Orders */}
+          {/* Patron Services & Legal */}
           <div>
             <h3 className="text-white font-extrabold text-sm mb-4 tracking-wide uppercase text-zinc-100">
-              Patron Services
+              Patron Services & Policies
             </h3>
             <ul className="space-y-3 text-xs">
               <li>
-                <Link to="/checkout" className="text-amber-400 hover:text-amber-300 font-bold transition-colors">
-                  Order Tiffin Now →
+                <Link to="/checkout" className="text-amber-400 hover:text-amber-300 font-bold transition-colors inline-flex items-center gap-1">
+                  <span>Order Tiffin Now</span>
+                  <ArrowRight size={12} />
                 </Link>
               </li>
               <li>
@@ -101,13 +108,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/payments" className="text-zinc-400 hover:text-emerald-400 transition-colors">
-                  Payment Ledger & Receipts
+                <Link to="/privacy-policy" className="text-zinc-400 hover:text-emerald-400 transition-colors">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="text-zinc-400 hover:text-emerald-400 transition-colors">
-                  Patron Login / Sign Up
+                <Link to="/terms" className="text-zinc-400 hover:text-emerald-400 transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link to="/refund-policy" className="text-zinc-400 hover:text-emerald-400 transition-colors">
+                  Subscription & Refund Policy
                 </Link>
               </li>
             </ul>
@@ -121,22 +133,25 @@ export default function Footer() {
             <ul className="space-y-3.5 text-xs">
               <li className="flex items-start gap-2.5 text-zinc-400">
                 <MapPin size={16} className="text-emerald-400 shrink-0 mt-0.5" />
-                <span>Near Reshimbagh / Civil Lines / Medical Square, Nagpur, Maharashtra</span>
+                <span>{BUSINESS_CONFIG.hubLocation}</span>
               </li>
               <li className="flex items-center gap-2.5 text-zinc-400">
                 <Phone size={16} className="text-emerald-400 shrink-0" />
-                <a href="tel:+917823098970" className="hover:text-emerald-400 transition-colors font-mono">
-                  +91 78230 98970
+                <a href={getPhoneCallUrl()} className="hover:text-emerald-400 transition-colors font-mono font-bold">
+                  {BUSINESS_CONFIG.phone}
                 </a>
               </li>
               <li className="flex items-center gap-2.5 text-zinc-400">
                 <Clock size={16} className="text-amber-400 shrink-0" />
-                <span>Lunch: 11:30 AM – 2:00 PM<br />Dinner: 7:30 PM – 10:00 PM</span>
+                <span>
+                  Lunch: {BUSINESS_CONFIG.operatingHours.lunch}<br />
+                  Dinner: {BUSINESS_CONFIG.operatingHours.dinner}
+                </span>
               </li>
               <li className="flex items-center gap-2.5 text-zinc-400">
                 <Mail size={16} className="text-emerald-400 shrink-0" />
-                <a href="mailto:tanikshnimje@gmail.com" className="hover:text-emerald-400 transition-colors">
-                  tanikshnimje@gmail.com
+                <a href={getEmailMailtoUrl()} className="hover:text-emerald-400 transition-colors">
+                  {BUSINESS_CONFIG.email}
                 </a>
               </li>
             </ul>
@@ -144,11 +159,12 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-zinc-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-zinc-500">
-          <p>© {new Date().getFullYear()} Nimje Gharchi Rasoi. Homestyle with love in Nagpur.</p>
+          <p>© {new Date().getFullYear()} {BUSINESS_CONFIG.name}. Homemade with love in Nagpur.</p>
           <div className="flex gap-4">
-            <Link to="/contact" className="hover:text-zinc-300 transition-colors">Support</Link>
-            <Link to="/about" className="hover:text-zinc-300 transition-colors">Quality Assurance</Link>
-            <Link to="/plans" className="hover:text-zinc-300 transition-colors">Subscription Rates</Link>
+            <Link to="/privacy-policy" className="hover:text-zinc-300 transition-colors">Privacy</Link>
+            <Link to="/terms" className="hover:text-zinc-300 transition-colors">Terms</Link>
+            <Link to="/refund-policy" className="hover:text-zinc-300 transition-colors">Refund Policy</Link>
+            <Link to="/contact" className="hover:text-zinc-300 transition-colors">Contact</Link>
           </div>
         </div>
       </div>

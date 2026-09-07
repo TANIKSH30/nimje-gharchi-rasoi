@@ -12,31 +12,28 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-20 bg-[#FCFBF8] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+    <section id="about" className="py-20 bg-[#FCFBF8] overflow-hidden w-full max-w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="w-full lg:w-1/2 relative"
+            className="w-full lg:w-1/2 relative overflow-hidden p-2"
           >
             <div className="grid grid-cols-2 gap-4">
               <img
                 src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 alt="Cooking fresh homemade meal"
-                className="w-full h-64 object-cover rounded-3xl rounded-tr-none shadow-lg mt-8 border-2 border-white"
+                className="w-full h-56 sm:h-64 object-cover rounded-3xl rounded-tr-none shadow-lg mt-6 sm:mt-8 border-2 border-white"
               />
               <img
                 src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 alt="Fresh wholesome food spread"
-                className="w-full h-64 object-cover rounded-3xl rounded-bl-none shadow-lg border-2 border-white"
+                className="w-full h-56 sm:h-64 object-cover rounded-3xl rounded-bl-none shadow-lg border-2 border-white"
               />
             </div>
-            {/* Decorative background glow - pointer-events-none */}
-            <div className="absolute -bottom-6 -left-6 w-28 h-28 bg-secondary/15 rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute -top-6 -right-6 w-36 h-36 bg-primary/15 rounded-full blur-2xl pointer-events-none" />
           </motion.div>
 
           <motion.div

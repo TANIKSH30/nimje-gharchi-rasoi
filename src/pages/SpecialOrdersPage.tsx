@@ -37,6 +37,8 @@ import {
 } from '@/services/specialOrderService';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import SEOHead from '@/components/seo/SEOHead';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -363,7 +365,12 @@ export default function SpecialOrdersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F3EC] flex flex-col selection:bg-primary/20">
+    <div className="min-h-screen bg-[#F6F3EC] flex flex-col selection:bg-primary/20 w-full max-w-full overflow-x-hidden">
+      <SEOHead
+        title="Special Homemade Food Orders & Nagpur Delicacies"
+        description="Order extra rotis, authentic Vidarbha curries, fresh paneer sabji, and traditional sweets made-to-order from Nimje Gharchi Rasoi in Nagpur."
+        canonicalPath="/special-orders"
+      />
       <Navbar />
 
       {/* Hero Section */}
@@ -972,6 +979,7 @@ export default function SpecialOrdersPage() {
       </Modal>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

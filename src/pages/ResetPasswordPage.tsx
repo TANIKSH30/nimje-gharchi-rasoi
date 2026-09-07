@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card, CardContent } from '@/components/ui/Card';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import SEOHead from '@/components/seo/SEOHead';
 
 export default function ResetPasswordPage() {
   const [newPassword, setNewPassword] = useState('');
@@ -52,6 +53,11 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#FCFBF8]">
+      <SEOHead
+        title="Set New Password | Nimje Gharchi Rasoi"
+        description="Set a new password for your Nimje Gharchi Rasoi account."
+        noIndex={true}
+      />
       <div className="w-full max-w-md">
         <Card className="rounded-3xl shadow-xl border border-gray-200 bg-white">
           <CardContent className="p-8">

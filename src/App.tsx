@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@/context/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import AdminRoute from '@/components/auth/AdminRoute';
@@ -11,6 +11,11 @@ import SpecialOrdersPage from '@/pages/SpecialOrdersPage';
 import AboutPage from '@/pages/AboutPage';
 import ContactPage from '@/pages/ContactPage';
 import CheckoutPage from '@/pages/CheckoutPage';
+
+// Legal Pages
+import PrivacyPolicyPage from '@/pages/legal/PrivacyPolicyPage';
+import TermsPage from '@/pages/legal/TermsPage';
+import RefundPolicyPage from '@/pages/legal/RefundPolicyPage';
 
 // Auth Pages
 import LoginPage from '@/pages/LoginPage';
@@ -40,6 +45,9 @@ import AdminReportsPage from '@/pages/admin/AdminReportsPage';
 import AdminNotificationsPage from '@/pages/admin/AdminNotificationsPage';
 import AdminSettingsPage from '@/pages/admin/AdminSettingsPage';
 
+// 404 Page
+import NotFoundPage from '@/pages/NotFoundPage';
+
 import ScrollToTop from '@/components/layout/ScrollToTop';
 
 export default function App() {
@@ -56,6 +64,11 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
 
+          {/* Legal & Policy Routes */}
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/refund-policy" element={<RefundPolicyPage />} />
+
           {/* Auth Routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
@@ -64,29 +77,155 @@ export default function App() {
           <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
           {/* Customer Portal (Protected) */}
-          <Route path="/dashboard" element={<ProtectedRoute><CustomerDashboardPage /></ProtectedRoute>} />
-          <Route path="/subscriptions" element={<ProtectedRoute><SubscriptionsPage /></ProtectedRoute>} />
-          <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
-          <Route path="/payments" element={<ProtectedRoute><PaymentsPage /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-          <Route path="/addresses" element={<ProtectedRoute><AddressesPage /></ProtectedRoute>} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <CustomerDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/subscriptions"
+            element={
+              <ProtectedRoute>
+                <SubscriptionsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <OrdersPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payments"
+            element={
+              <ProtectedRoute>
+                <PaymentsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/addresses"
+            element={
+              <ProtectedRoute>
+                <AddressesPage />
+              </ProtectedRoute>
+            }
+          />
 
-          {/* Admin Command Center (Strictly Admin Protected) */}
-          <Route path="/admin" element={<AdminRoute><AdminOverviewPage /></AdminRoute>} />
-          <Route path="/admin/payments" element={<AdminRoute><AdminPaymentsPage /></AdminRoute>} />
-          <Route path="/admin/subscriptions" element={<AdminRoute><AdminSubscriptionsPage /></AdminRoute>} />
-          <Route path="/admin/orders" element={<AdminRoute><AdminOrdersPage /></AdminRoute>} />
-          <Route path="/admin/special-orders" element={<AdminRoute><AdminSpecialOrdersPage /></AdminRoute>} />
-          <Route path="/admin/customers" element={<AdminRoute><AdminCustomersPage /></AdminRoute>} />
-          <Route path="/admin/menu" element={<AdminRoute><AdminMenuPage /></AdminRoute>} />
-          <Route path="/admin/plans" element={<AdminRoute><AdminPlansPage /></AdminRoute>} />
-          <Route path="/admin/analytics" element={<AdminRoute><AdminReportsPage /></AdminRoute>} />
-          <Route path="/admin/reports" element={<AdminRoute><AdminReportsPage /></AdminRoute>} />
-          <Route path="/admin/notifications" element={<AdminRoute><AdminNotificationsPage /></AdminRoute>} />
-          <Route path="/admin/settings" element={<AdminRoute><AdminSettingsPage /></AdminRoute>} />
+          {/* Admin Command Center (Admin Protected) */}
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminOverviewPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/payments"
+            element={
+              <AdminRoute>
+                <AdminPaymentsPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/subscriptions"
+            element={
+              <AdminRoute>
+                <AdminSubscriptionsPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              <AdminRoute>
+                <AdminOrdersPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/special-orders"
+            element={
+              <AdminRoute>
+                <AdminSpecialOrdersPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/customers"
+            element={
+              <AdminRoute>
+                <AdminCustomersPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/menu"
+            element={
+              <AdminRoute>
+                <AdminMenuPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/plans"
+            element={
+              <AdminRoute>
+                <AdminPlansPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/analytics"
+            element={
+              <AdminRoute>
+                <AdminReportsPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/reports"
+            element={
+              <AdminRoute>
+                <AdminReportsPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/notifications"
+            element={
+              <AdminRoute>
+                <AdminNotificationsPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/settings"
+            element={
+              <AdminRoute>
+                <AdminSettingsPage />
+              </AdminRoute>
+            }
+          />
 
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* 404 Fallback */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
