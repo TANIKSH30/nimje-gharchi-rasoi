@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Flame, ShieldCheck, Heart, Eye, X, ChefHat, CheckCircle2 } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
@@ -88,6 +88,67 @@ export default function GallerySection() {
     ? GALLERY_ITEMS
     : GALLERY_ITEMS.filter((item) => item.category === activeFilter);
 
+  // Auto-scroll loop for mobile view
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Build duplicated items for seamless infinite horizontal loop on mobile
+  const mobileItems = (() => {
+    if (filteredItems.length === 0) return [];
+    let items = [...filteredItems];
+    while (items.length < 8) {
+      items = [...items, ...filteredItems];
+    }
+    return [...items, ...items];
+  })();
+
+  useEffect(() => {
+    const el = mobileScrollRef.current;
+    if (!el) return;
+
+    let animId: number;
+    let lastTime = performance.now();
+
+    const loop = (currentTime: number) => {
+      const dt = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+
+      // Only auto-scroll when not paused by touch/interaction and on mobile (< 640px)
+      if (!isPaused && window.innerWidth < 640 && el) {
+        // Continuous smooth scroll rate: 45px per second
+        el.scrollLeft += 45 * dt;
+
+        const halfWidth = el.scrollWidth / 2;
+        if (el.scrollLeft >= halfWidth) {
+          el.scrollLeft -= halfWidth;
+        } else if (el.scrollLeft <= 0) {
+          el.scrollLeft += halfWidth;
+        }
+      }
+
+      animId = requestAnimationFrame(loop);
+    };
+
+    animId = requestAnimationFrame(loop);
+    return () => {
+      cancelAnimationFrame(animId);
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    };
+  }, [isPaused, activeFilter]);
+
+  const handleTouchStart = () => {
+    setIsPaused(true);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+  };
+
+  const handleTouchEnd = () => {
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 1800);
+  };
+
   return (
     <section className="py-20 sm:py-28 bg-[#F8F6F0] overflow-hidden border-t border-[#E5E0D6]/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -134,8 +195,66 @@ export default function GallerySection() {
           </div>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Mobile View: Continuous Auto-Scrolling Slider (< 640px) */}
+        <div className="block sm:hidden">
+          <div
+            ref={mobileScrollRef}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            className="flex overflow-x-auto pb-4 pt-1 gap-4 -mx-4 px-4 scrollbar-none select-none cursor-grab active:cursor-grabbing"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
+            {mobileItems.map((item, index) => (
+              <div
+                key={`mobile-${item.id}-${index}`}
+                onClick={() => setSelectedPhoto(item)}
+                className="group relative h-80 w-[78vw] min-w-[270px] max-w-[320px] shrink-0 rounded-3xl overflow-hidden shadow-sm border border-[#E5E0D6] bg-white cursor-pointer"
+              >
+                {/* Image */}
+                <img
+                  src={item.src}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+
+                {/* Gradient Scrim */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-75" />
+
+                {/* Top Tag Badge */}
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-white/95 text-emerald-900 backdrop-blur-md shadow-xs border border-white/40">
+                    {item.tag}
+                  </span>
+                </div>
+
+                {/* Bottom Caption */}
+                <div className="absolute bottom-0 left-0 right-0 p-5 z-10 space-y-1">
+                  <h3 className="text-white font-black text-base leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-zinc-200/90 text-xs line-clamp-2 leading-relaxed font-normal">
+                    {item.subtitle}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile auto-scroll status / swipe indicator */}
+          <div className="flex items-center justify-between text-[11px] text-stone-500 font-medium px-1 pt-1">
+            <span className="flex items-center gap-1.5">
+              <span className={`w-1.5 h-1.5 rounded-full ${isPaused ? 'bg-amber-500' : 'bg-emerald-600 animate-pulse'}`} />
+              {isPaused ? 'Paused (Touch to explore)' : 'Continuous auto-scroll'}
+            </span>
+            <span className="text-stone-400">Swipe anytime</span>
+          </div>
+        </div>
+
+        {/* Desktop / Laptop View: Original 4-Column Grid (100% Unchanged) */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {filteredItems.map((item, index) => (
             <motion.div
               key={item.id}
